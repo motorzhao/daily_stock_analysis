@@ -59,8 +59,8 @@ jobs:
           
           # OpenAI 兼容 API（备选）
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
-          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL || 'https://api.deepseek.com/v1' }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL || 'deepseek-chat' }}
           
           # 通知渠道（可同时配置多个，全部推送）
           # 方式一：企业微信
@@ -76,14 +76,20 @@ jobs:
           EMAIL_RECEIVERS: ${{ secrets.EMAIL_RECEIVERS }}
           # 方式五：自定义 Webhook（支持钉钉、Discord、Slack、Bark等，多个用逗号分隔）
           CUSTOM_WEBHOOK_URLS: ${{ secrets.CUSTOM_WEBHOOK_URLS }}
-          # 方式六：飞书文档
+          CUSTOM_WEBHOOK_BEARER_TOKEN: ${{ secrets.CUSTOM_WEBHOOK_BEARER_TOKEN }}
+          # 方式六：Pushover 手机推送
+          PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
+          PUSHOVER_API_TOKEN: ${{ secrets.PUSHOVER_API_TOKEN }}
+          # 单股推送模式：设为 true 则每分析完一只股票立即推送
+          SINGLE_STOCK_NOTIFY: ${{ secrets.SINGLE_STOCK_NOTIFY || 'false' }}
+          # 方式七：飞书文档
           FEISHU_APP_ID: ${{ secrets.FEISHU_APP_ID }}
           FEISHU_APP_SECRET: ${{ secrets.FEISHU_APP_SECRET }}
           FEISHU_FOLDER_TOKEN: ${{ secrets.FEISHU_FOLDER_TOKEN }}
 
           
           # 自选股列表 (从 secrets 或使用默认值)
-          STOCK_LIST: ${{ secrets.STOCK_LIST || '600519' }}
+          STOCK_LIST: ${{ secrets.STOCK_LIST || '603989,002475' }}
           
           # 其他配置
           LOG_LEVEL: INFO
